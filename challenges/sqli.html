@@ -261,7 +261,7 @@
   </div>
 
   <div class="panel">
-    <div class="panel-label">// QUERY LOG — DATABASE OUTPUT</div>
+    <div class="panel-label">// QUERY LOG / DATABASE OUTPUT</div>
     <div class="terminal" id="terminal"><span class="t-prompt">&gt; Awaiting input...</span>
 </div>
   </div>
@@ -362,10 +362,10 @@ async function attemptLogin() {
   if (isExploit) {
     _markStep(1); _markStep(2); _markStep(3);
     const flag = await assembleCode();
-    out += `<span class="t-success">⚠ QUERY RETURNED 1 ROW — AUTHENTICATION BYPASSED</span>\n`;
+    out += `<span class="t-success">⚠ QUERY RETURNED 1 ROW, AUTHENTICATION BYPASSED</span>\n`;
     out += `<span class="t-data">| id | username | password_hash       | role  | secret_flag   |\n`;
     out += `|  1 | admin    | 5f4dcc3b5aa765d61d  | ADMIN | ${flag}     |\n</span>`;
-    out += `<span class="t-success">\n✔ ACCESS GRANTED — Welcome, Administrator.</span>`;
+    out += `<span class="t-success">\n✔ ACCESS GRANTED! Welcome, Administrator.</span>`;
     const revealEl = document.getElementById('code-reveal');
     revealEl.classList.add('show');
     _scrollToReveal();
@@ -373,9 +373,9 @@ async function attemptLogin() {
   } else if (u === '' && p === '') {
     out += `<span class="t-error">ERROR: Empty credentials rejected.</span>`;
   } else if (u.includes("'")) {
-    out += `<span class="t-error">SYNTAX ERROR near unexpected token — query malformed. Keep trying...</span>`;
+    out += `<span class="t-error">SYNTAX ERROR near unexpected token - query malformed. Keep trying...</span>`;
   } else {
-    out += `<span class="t-error">RESULT: 0 rows — Authentication failed. Credentials not found.</span>`;
+    out += `<span class="t-error">RESULT: 0 rows, Authentication failed. Credentials not found.</span>`;
   }
 
   term.innerHTML = out;
